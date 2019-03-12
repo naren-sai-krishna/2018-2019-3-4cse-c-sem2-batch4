@@ -1,0 +1,211 @@
+/* [GLOBAL] */
+*:focus {
+  outline: none;
+}
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: 'kanit',cursive;
+  outline: none;
+  color:white;
+  overflow-x:hidden;
+}
+body{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.9),rgba(0,0,0,0.9)), url('images/i2.jpg');
+  background-size: cover;
+      
+                background-position: center;
+  
+}
+/* [HEADER + FOOTER] */
+#page-header, #page-footer {
+  color: whitesmoke;
+ background-color: transparent;
+  padding: 10px;
+  position: relative;
+  width:100%;
+  
+  
+}
+#page-header{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.9),rgba(0,0,0,0.9)), url('images/i2.jpg');
+  position: fixed;
+  z-index: 10;
+}
+.clear {
+  clear: both;
+}
+#page-cart {
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 20px;
+  color:white;
+  border: 2px solid black;
+  background-color: transparent;
+  margin-right: 2%;
+  float:right;
+  
+  cursor: pointer;
+}
+
+/* [NOTIFICATION BOX] */
+#noteOut {
+  position: fixed;
+  width: 100%;
+  top: 40%;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 1s;
+  z-index: 10;
+}
+#noteIn {
+  max-width: 320px;
+  margin : 0 auto;
+  padding: 10px;
+  background: #275691;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  z-index: 10;
+}
+#noteOut.show {
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+}
+.btn {
+  border-radius: 12px;
+  background-color: transparent;
+  border: 2px auto;
+  border-color: black;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  position:absolute;
+  top:5px;
+  left:5px;
+  z-index:20;
+  outline:0px;
+}
+/* [PRODUCTS] */
+#products {
+  padding: 10px;
+  color:white;
+  position: relative;
+  z-index:5;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top:6%;
+}
+.pdt {
+  flex-grow: 1;
+  width: 30%;
+  letter-spacing: 1.5px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  box-sizing: border-box;
+}
+@media all and (max-width: 768px) {
+  .pdt { width: 45%;padding-top: 40px; }
+}
+.pdt img {
+  max-width: 50%;
+  object-fit: contain;
+  float:left;
+}
+.pdtName {
+  font-size: 18px;
+  margin: 5px 0;
+  font-family: 'Flamenco', cursive;
+  font-weight: 900;
+}
+.pdtPrice {
+  color: rgb(255, 0, 170);
+  font-weight: 700;
+  font-family: 'kanit',cursive;
+}
+.pdtDesc {
+  font-size: 16px;
+  color: #777;
+}
+.pdtAdd {
+  font-weight: -10;
+  width: 50%;
+  background: purple;
+  font-size: 16px;
+  color: #fff;
+  border: 0;
+  padding: 10px 0;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  outline: 0px;
+  border-radius: 12px;
+}
+.pdtAdd:hover{
+  
+  color: purple;
+  background-color:white;
+  border: 2px solid purple;
+}
+#products{
+  padding:10px;
+  padding-top:6%;
+  position: relative;
+  z-index:5;
+}
+/* [SHOPPING CART] */
+#cart {
+  padding: 10px;
+  padding-top:6%;
+  position: relative;
+  z-index:5;
+}
+#products.ninja, #cart.ninja {
+  display: none ;
+}
+table.zebra {
+  border-collapse: collapse;
+  width:30%;
+  float:center;
+  margin-left:35%;
+}
+table.zebra th {
+  text-align: left;
+}
+table.zebra th, table.zebra td {
+  padding: 10px;
+  
+}
+table.zebra tr:nth-child(odd) {
+  background: #f2f2f2;
+  color:black;
+}
+table.zebra input[type=number] {
+  width: 60px;
+  padding: 5px;
+}
+
+#cart-checkout {
+  margin-top: 5%;
+  max-width: 320px;
+  margin-left:36%;
+}
+#cart-checkout input {
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 5px;
+  width: 100%;
+}
+#cart-checkout input[type=submit] {
+  background: #a82828;
+  color: #fff;
+  border: 0;
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
