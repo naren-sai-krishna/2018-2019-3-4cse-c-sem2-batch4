@@ -1,0 +1,509 @@
+<?php 
+$i=0;
+$j=0;
+require('php/db.php');
+session_start();
+$date=$_SESSION['date1'];
+$time=$_SESSION['time1'];
+$queryRole = "SELECT * FROM table_booking WHERE date_of_booking='$date' and time_='$time'";
+$result1=mysqli_query($con,$queryRole) or die(mysqli_error());
+$rows1 = mysqli_num_rows($result1);
+$row1=mysqli_fetch_assoc($result1);
+if(!isset($_SESSION['sfirstname'])){
+	header('Location: homepage_before_login.php');
+}
+if(isset($_POST['submit']))
+{
+	for($i=1;$i<=4;$i++){
+		for($j=1;$j<=9;$j++){
+			$ele="f" . $i . "t" . $j;?>
+			<script>alert("<?php echo $ele ?>");
+
+			var x = document.getElementById("<? php echo $ele ?>");
+			  var v = x.getAttribute("src");
+			  
+			  if(v == "images/selected.png"){
+				v = "images/reserved.png";
+				// <?php 
+				// $queryRole = "UPDATE table_booking SET id=id WHERE date_of_booking='$date' and time_='$time'";
+				// $result1=mysqli_query($con,$queryRole) or die(mysqli_error());
+				// $rows1 = mysqli_num_rows($result1);
+				// $row1=mysqli_fetch_assoc($result1);
+				
+				
+				
+				
+				// ?>
+				x.setAttribute("src", v);
+				
+			  }
+			  </script><?php
+				  
+		}
+	}
+
+
+
+
+	//print_r($_POST);exit;
+	$name=$_SESSION['sfirstname'];  //$_POST['<name of input tag>']
+	$date=$_SESSION['date1'];
+	$time=$_SESSION['time1'];
+	$no_of_table=2;//$_POST['no_of_tables'];
+	$no_of_person=4;//$_POST['no_of_person'];
+	$queryy=mysqli_query($con,"SELECT * from table_booking where date_of_booking='$date' and time_='$time'");
+
+	$insert=mysqli_query($con,"INSERT INTO table_booking(username,date_of_booking,time_, no_tables, no_of_persons) VALUES('$name','$date','$time','$no_of_table','$no_of_person')");
+	if($insert)
+	{ ?>
+		<script> 
+		alert("Your table has been sucessfully booked!. Thank You");
+        
+		</script>
+	<?php }
+
+}
+?>
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+		<link rel="icon" href="images/Logo.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		*{
+                
+				margin: 0px;
+				padding:0px;
+				box-sizing: border-box;
+				font-family: 'Flamenco';
+				font-weight:bold;
+				}
+        .Logo{
+                height: 130px;
+                width: auto;
+                float: left;
+                margin-top: 20px;
+                transition: 10s linear;
+        }
+		body{
+			background-image: linear-gradient(rgba(0, 0, 0, 0.8),rgba(0,0,0,0.8)), url('images/i2.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 100vh;
+				overflow: hidden;
+		}
+        h4{
+            font-family: 'Pacifico';
+            color:white;
+            
+        }
+        h1{
+            font-family: 'Pacifico';
+            color:white;
+            
+        }
+        table{
+            padding-left:5%;
+            height:30%;
+            width:40%;
+            background-color:#0009;
+            margin-bottom:2%;
+            margin-left:5%;
+            margin-right:5%;
+            margin-top:8%;
+
+            border-spacing:0px;
+        }
+        .btn {
+  border-radius: 12px;
+  border-color:purple;
+  background-color: transparent;
+  border: 2px solid;
+  color: purple;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 1%;
+  position: absolute;
+  opacity: 1;
+  transition: 0.3s;
+  z-index:2;
+  
+}
+
+
+
+
+
+.booking-form {
+	position: relative;
+	max-width: 500px;
+	width: 100%;
+	margin: 0px auto;
+	padding: 15px;
+	overflow: hidden;
+	background-color: transparent;
+}
+
+
+.booking-form .form-header h1 {
+	font-weight: 700;
+	text-transform: capitalize;
+	font-size: 42px;
+	margin: 0px;
+	color: #fff;
+	
+}
+
+.booking-form .form-group {
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.booking-form .form-control {
+	background-color: white;
+	height: 60px;
+	padding: 0px 25px;
+	border: none;
+	border-radius: 40px;
+	color: black;
+	-webkit-box-shadow: 0px 0px 0px 2px transparent;
+	box-shadow: 0px 0px 0px 2px transparent;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+
+.booking-form .form-control::-webkit-input-placeholder {
+	color: black;
+}
+
+.booking-form .form-control:-ms-input-placeholder {
+	color: black;
+}
+
+.booking-form .form-control::placeholder {
+	color: black;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+.booking-form .form-control:focus {
+	-webkit-box-shadow: 0px 0px 0px 2px #ff8846;
+	box-shadow: 0px 0px 0px 2px #ff8846;
+}
+
+.booking-form input[type="date"].form-control {
+	padding-top: 16px;
+}
+
+.booking-form input[type="date"].form-control:invalid {
+	color: black;
+}
+
+.booking-form input[type="date"].form-control+.form-label {
+	opacity: 1;
+	top: 10px;
+}
+
+.booking-form select.form-control {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.booking-form select.form-control:invalid {
+	color: black;
+}
+
+.booking-form select.form-control+.select-arrow {
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	width: 32px;
+	line-height: 32px;
+	height: 32px;
+	text-align: center;
+	pointer-events: none;
+	color: rgba(255, 255, 255, 0.5);
+	
+	font-size: 14px;
+	text-decoration: none;
+}
+
+
+
+.booking-form select.form-control option {
+	color: #000;
+	font-size:20px;
+	
+}
+
+.booking-form .form-label {
+	position: absolute;
+	top: -10px;
+	left: 25px;
+	opacity: 0;
+	color: #ff8846;
+	
+	font-size: 13px;
+	text-decoration: none;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1.3px;
+	height: 15px;
+	line-height: 15px;
+	-webkit-transition: 0.2s all;
+	transition: 0.2s all;
+	opacity: 1;
+	top: 10px;
+	
+	
+}
+
+.booking-form .form-group.input-not-empty .form-control {
+	padding-top: 0px;
+	
+}
+
+.booking-form .form-group.input-not-empty .form-label {
+	opacity: 1;
+	top: 10px;
+}
+
+.booking-form .submit-btn {
+    margin-top:-35%;
+	color: #fff;
+	background-color: #e35e0a;
+	font-weight: 700;
+	height: 60px;
+	padding: 10px 30px;
+	width: 100%;
+	border-radius: 40px;
+	border: none;
+	text-transform: uppercase;
+	font-size: 16px;
+	letter-spacing: 1.3px;
+	-webkit-transition: 0.2s all;
+	transition: 0.2s all;
+}
+.form-inline { 
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.booking-form .submit-btn:hover,
+.booking-form .submit-btn:focus {
+	opacity: 0.9;
+	
+}
+
+    </style>
+</head>
+
+<body>
+<button class="btn" style="position:absolute" onclick="goBack()">Back</button>
+
+
+<div class="info" style="position:absolute;top:2%;right:5%">
+    <img src="images/reserved.png" alt="table">&nbsp;&nbsp;&nbsp;
+    <img src="images/selected.png" alt="table">&nbsp;&nbsp;&nbsp;
+    <img src="images/available.png" alt="table">
+</div>
+
+<div class="info" style="color:white;position:absolute;top:10%;right:5%">
+    <span>Reserved</span>&nbsp;&nbsp;&nbsp; 
+    <span>Selected</span>&nbsp;&nbsp;&nbsp;
+    <span>Available</span>
+</div>
+                     
+				
+					<div class="booking-form " >
+						<form method="post" class="form-inline">
+								
+							<div class="form-btn" style="margin:20px">
+								<input type="submit" name="submit" onclick="Check()" value="Book" style="margin-left:145%;margin-top:10%;width:100%;padding-left:30px;padding-right:30px"class="submit-btn">
+							</div>
+						</form>
+					</div>
+
+        <!--<div style="margin-left:42%;margin-top:-2%">
+        <h4>Cost per table = Rs. 250/- *</h4>
+        <h4>Table Capacity : 4 members</h4>
+</div>-->
+
+<div class="rest">
+
+                    <img src="images/Logo.png" onload="Func()" style="margin-top:17%;margin-left:45%"class="Logo" id="Logo" alt="LOGO">
+                                        
+<table style="width:40%;position:absolute;top:0;left:0;">
+<caption> <h1>Floor 1</h1></caption>
+  
+  <tr>
+    <td>
+	
+	  <img src="<?php echo $row1['f1t1']?>" class="table-logo" alt="LOGO" id="f1t1" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f1t2']?>" class="table-logo" alt="LOGO" id="f1t2" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f1t3']?>" class="table-logo" alt="LOGO" id="f1t3" onclick="change(id)"></td>
+  </tr>
+  <tr>
+    <td><img src="<?php echo $row1['f1t4']?>" class="table-logo" alt="LOGO" id="f1t4" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f1t5']?>" class="table-logo" alt="LOGO" id="f1t5" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f1t6']?>" class="table-logo" alt="LOGO" id="f1t6" onclick="change(id)"></td>
+  </tr>
+  <tr>
+    <td><img src="<?php echo $row1['f1t7']?>" class="table-logo" alt="LOGO" id="f1t7" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f1t8']?>" class="table-logo" alt="LOGO" id="f1t8" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f1t9']?>" class="table-logo" alt="LOGO" id="f1t9" onclick="change(id)"></td>
+  </tr>
+</table>
+
+
+
+<table style="width:40%;position:absolute;bottom:0;left:0;">
+<caption> <h1>Floor 3</h1></caption>
+  
+  <tr>
+    <td><img src="<?php echo $row1['f3t1']?>" class="table-logo" alt="LOGO" id="f3t1" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f3t2']?>" class="table-logo" alt="LOGO" id="f3t2" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f3t3']?>" class="table-logo" alt="LOGO" id="f3t3" onclick="change(id)"></td>
+  </tr>
+  <tr>
+    <td><img src="<?php echo $row1['f3t4']?>" class="table-logo" alt="LOGO" id="f3t4" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f3t5']?>" class="table-logo" alt="LOGO" id="f3t5" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f3t6']?>" class="table-logo" alt="LOGO" id="f3t6" onclick="change(id)"></td>
+  </tr>
+  <tr>
+    <td><img src="<?php echo $row1['f3t7']?>" class="table-logo" alt="LOGO" id="f3t7" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f3t8']?>" class="table-logo" alt="LOGO" id="f3t8" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f3t9']?>" class="table-logo" alt="LOGO" id="f3t9" onclick="change(id)"></td>
+  </tr>
+</table>
+
+<table style="width:40%;position:absolute;bottom:0;right:0;">
+<caption> <h1>Floor 4</h1></caption>
+  
+  <tr>
+    <td><img src="<?php echo $row1['f4t1']?>" class="table-logo" alt="LOGO" id="f4t1" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f4t2']?>" class="table-logo" alt="LOGO" id="f4t2" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f4t3']?>" class="table-logo" alt="LOGO" id="f4t3" onclick="change(id)"></td>
+  </tr>
+  <tr>
+    <td><img src="<?php echo $row1['f4t4']?>" class="table-logo" alt="LOGO" id="f4t4" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f4t5']?>" class="table-logo" alt="LOGO" id="f4t5" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f4t6']?>" class="table-logo" alt="LOGO" id="f4t6" onclick="change(id)"></td>
+  </tr>
+  <tr>
+    <td><img src="<?php echo $row1['f4t7']?>" class="table-logo" alt="LOGO" id="f4t7" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f4t8']?>" class="table-logo" alt="LOGO" id="f4t8" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f4t9']?>" class="table-logo" alt="LOGO" id="f4t9" onclick="change(id)"></td>
+  </tr>
+</table>
+
+<table style="width:40%;position:absolute;top:0;right:0;">
+<caption> <h1>Floor 2</h1></caption>
+  
+  <tr>
+    <td><img src="<?php echo $row1['f2t1']?>" class="table-logo" alt="LOGO" id="f2t1" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f2t2']?>" class="table-logo" alt="LOGO" id="f2t2" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f2t3']?>" class="table-logo" alt="LOGO" id="f2t3" onclick="change(id)"></td>
+  </tr>
+  <tr>
+    <td><img src="<?php echo $row1['f2t4']?>" class="table-logo" alt="LOGO" id="f2t4" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f2t5']?>" class="table-logo" alt="LOGO" id="f2t5" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f2t6']?>" class="table-logo" alt="LOGO" id="f2t6" onclick="change(id)"></td>
+  </tr>
+  <tr>
+    <td><img src="<?php echo $row1['f2t7']?>" class="table-logo" alt="LOGO" id="f2t7" onclick="change(id)"></td>
+    <td><img src="<?php echo $row1['f2t8']?>" class="table-logo" alt="LOGO" id="f2t8" onclick="change(id)"></td> 
+    <td><img src="<?php echo $row1['f2t9']?>" class="table-logo" alt="LOGO" id="f2t9" onclick="change(id)"></td>
+  </tr>
+</table>
+
+
+                    
+
+
+<script>
+    function goBack() {
+            window.history.back();
+        }  
+		$('.form-control').each(function () {
+			floatedLabel($(this));
+		});
+
+		$('.form-control').on('input', function () {
+			floatedLabel($(this));
+		});
+
+		function floatedLabel(input) {
+			var $field = input.closest('.form-group');
+			if (input.val()) {
+				$field.addClass('input-not-empty');
+			} else {
+				$field.removeClass('input-not-empty');
+			}
+		}
+    function change(element)
+{
+  var x = document.getElementById(element);
+  var v = x.getAttribute("src");
+  if(v == "images/reserved.png"){
+      alert("TABLE RESERVED ! PLEASE SELECT ANOTHER.")
+
+  }
+  else if(v == "images/available.png")
+    v = "images/selected.png";
+  else
+    v = "images/available.png";
+  x.setAttribute("src", v);	
+}
+
+function Func(){
+    Logo=document.getElementById('Logo');
+    Logo.style.transform="rotate(360deg)";
+    
+}
+function Check(){
+	
+	for(var i=1;i<=4;i++){
+			for(var j=1;j<=9;j++){
+				ele="f"+i+"t"+j;
+				
+				var x = document.getElementById(ele);
+				  var v = x.getAttribute("src");
+				  
+  				if(v == "images/selected.png"){
+					v = "images/reserved.png";
+					// <?php 
+					// $queryRole = "UPDATE table_booking SET id=id WHERE date_of_booking='$date' and time_='$time'";
+					// $result1=mysqli_query($con,$queryRole) or die(mysqli_error());
+					// $rows1 = mysqli_num_rows($result1);
+					// $row1=mysqli_fetch_assoc($result1);
+					
+					
+					
+					
+					// ?>
+					x.setAttribute("src", v);
+				  }
+		  			
+			}
+		}
+}
+    </script>
+
+
+
+</body>
